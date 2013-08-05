@@ -1,4 +1,4 @@
 ROSALIND_solutions
 ==================
 
-my solutions for bioinformatics problems posted at rosalind.info
+my solutions to bioinformatics problems posted at rosalind.info
