@@ -1,0 +1,52 @@
+# @author OI
+# @date August 5, 2013
+# this code takes a ssDNA sequence and returns
+# location and length of a possible resstriction site
+# restriction sites can be 4 to 12 nucleotides long
+MIN = 4
+MAX = 12
+def find_restr_sites(seq)
+  res = []
+  bases = seq.split('')
+  i = MIN
+  while i <= MAX
+    j = 0
+    while j < bases.length - i + 1
+      res << "#{j + 1} #{i}" if is_polyndrome?(bases[j...(j + i)])
+      j += 1
+    end
+    
+    i += 1
+  end
+  res.each do |pair|
+    puts pair
+  end
+  
+  res.join("   ")
+end
+
+def is_polyndrome?(array)
+  rev_array = []
+  array.each do |base|
+    case base
+    when "A"
+      comp_base = "T"
+    when "T"
+      comp_base = "A"
+    when "C"
+      comp_base = "G"
+    when "G"
+      comp_base = "C"
+    end
+    rev_array.unshift(comp_base)
+  end
+  
+  if rev_array.join("") == array.join("")
+    #puts "#{rev_array.join('')} ... #{array.join('')}"
+    return true 
+  end
+  false
+end
+
+s = 'GCGCTGGTGAATACGCGCCGGGGGGAGAGAGCCGGGTCCTGCTCTGACAGTACTTATCGGAAAAGTGAAGAATTATACGGTTAGTGAGGACCCAACCATCAATCCGAACTCGGAATCAGCCAGCATAATAATTTCTTGGGACTCTCACACAGAACACACCCGGCCTGTCCGTCGAGATAATGTAAACCGTGGGCTAGAGAAACACGATTTTGATTGCAACTACTAACGCGATAGAGTGAAAACTATCTCCGGCGGCAGGTCCAAGAAAGAGGGTGTATATTGAGCACGACAGCCGCGTCGCGAAGTTGCAAGAGGTCGAGTGTGTTTTGTTTCTTTCCTGCTTCACTCATTTTAATGCAATACATAACACCGCCCTTTCCTAGCAATAATTCCGCGAGCCCCACCAAAGCTCGGTTTTTTAGGTATAATTGCGAAGCTTCGGGATGCATCCCGGAACTTAGACCGGGAGAGGCCGTATCTGTTCACTTCGTGGCCTAACCTGGACTGTCAGGAACCCCGAATGCCTTTTTGGGGTCATATTCGTTACAATAAATCGGGCCTTGCACTAACTGGGTATCTAATCCGACCTTCCCATGGCGCGCTCCCCAAATTAATTGTAAGTAGGATTCCTCGGGCTAGCAAGGGGCCGGTGAAACCAAGGACTTTATCACAATAGACCACGTGCTCGCGATTCTGTAATGCAACCTGAGGTGAAAAGCACCTAATTATCCGGCGGAACGCGCCAGTCCGTACGTTTAGGTGGTCCAGGGGTCTTAATCTCAAGCTCAGGACTGGGCTAAGCGAGGTAGGACCCCAAGACCACACCGACTGACACCGCTTTGATCGGGCGAGGAGATTCGAGAAACTTGCCGATGCCAAAGTCGTTCCGCGC'
+puts find_restr_sites(s)
