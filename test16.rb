@@ -15,7 +15,7 @@ def fibs(n, k)
     prev_children = children
     children = parents * k
     parents += prev_children
-    puts "months = #{months} ... parents = #{parents} .... children = #{children}"
+    #puts "months = #{months} ... parents = #{parents} .... children = #{children}"
   end
   
   children + parents
